@@ -369,7 +369,7 @@ def get_barlowtwins(pretrained=True, device='cuda'):
         # # Pretrained barlowtwins readout weights for ImageNet
         # try:
         #     weights = torch.load(
-        #         './simclr/checkpoint/barlowtwins_readout.pth')['model']
+        #         './checkpoints/barlowtwins_readout.pth')['model']
         #     weights = {key[len('module.'):]: val for key, val in weights.items()}
         #     missing_keys, unexpected_keys = model.load_state_dict(weights, strict=False)
         #     assert missing_keys == [] and unexpected_keys == []
@@ -425,7 +425,7 @@ def get_SimCLR(model_name, pretrained=True, device='cuda'):
 
         # try:
         #     weights = torch.load(
-        #         f'./simclr/checkpoint/{model_name}_readout.pth')['model']
+        #         f'./checkpoints/{model_name}_readout.pth')['model']
         #     weights = {key[len('module.'):]: val for key, val in weights.items()}
         #     missing_keys, unexpected_keys = model.load_state_dict(weights, strict=False)
         #     assert missing_keys == [] and unexpected_keys == []

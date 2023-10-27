@@ -65,9 +65,7 @@ def create_dataframe(model_dict, identifier, centered=True):
                 else:
                     temp[key] = [np.array(val)]
 
-        # Include the layers as a column
         concat_layers = temp
-        # concat_layers['layers'] = [layers]
 
         df = pd.DataFrame.from_dict(concat_layers, orient='index').transpose()
 
@@ -76,7 +74,6 @@ def create_dataframe(model_dict, identifier, centered=True):
         else:
             final_df = final_df.join(df)
 
-    # identifier_name = '_'.join(identifier)
     identifier_columns = ["pooling", "region", "model", "trained"]
 
     final_df.rename(index={0: tuple(identifier)}, inplace=True)
@@ -213,12 +210,12 @@ def process_model(df, eff_dim_cutoff=0, threshold=0.9999):
         C = model_data.responses_C[:-2]
 
         # Mean over trials - Sum over neurons/classes
-        gen_errs = model_data.responses_gen_errs[:-2]  # .mean(1).sum(-1)
-        tr_errs = model_data.responses_tr_errs[:-2]  # .mean(1).sum(-1)
-        test_errs = model_data.responses_test_errs[:-2]  # .mean(1).sum(-1)
-        gen_norm = model_data.responses_gen_norm[:-2]  # .mean(1).sum(-1)
-        tr_norm = model_data.responses_tr_norm[:-2]  # .mean(1).sum(-1)
-        test_norm = model_data.responses_test_norm[:-2]  # .mean(1).sum(-1)
+        gen_errs = model_data.responses_gen_errs[:-2]
+        tr_errs = model_data.responses_tr_errs[:-2]
+        test_errs = model_data.responses_test_errs[:-2]
+        gen_norm = model_data.responses_gen_norm[:-2]
+        tr_norm = model_data.responses_tr_norm[:-2]
+        test_norm = model_data.responses_test_norm[:-2]
         assert np.allclose(P[0]*gen_errs*gen_norm, np.einsum('ij,ikjl->ikjl', pvals,
                            tr_errs*tr_norm) + np.einsum('ij,ikjl->ikjl', P[0]-pvals, test_errs*test_norm))
 

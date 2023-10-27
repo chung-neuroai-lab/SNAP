@@ -34,7 +34,6 @@ def hook_activation(name, activation, store_batches=False, pooling=None):
 
         output = pool_fn(output.cuda().type(torch.cuda.DoubleTensor)).detach().cpu()
         assert output.ndim == 2, "Activations must be 1d vectors"
-        # print(model._get_name(), output.shape)
 
         if store_batches:
             activation[name] += [output]
@@ -165,26 +164,6 @@ def pool_AvgPool(output_dim: tuple[int, int]):
             assert len(out) == B
 
         return out.reshape(B, -1)
-
-    return pool_fn
-
-
-def pool_PCA(output_dim):
-
-    assert isinstance(output_dim, int)
-
-    @torch.no_grad()
-    def pool_fn(out):
-
-        B, C, H, W = out.shape  # Channels first (B, C, H, W)
-        if C*H*W < output_dim:
-            return out.reshape(B, -1)
-
-        out = out.type(torch.cuda.DoubleTensor).reshape(B, -1)
-        _, _, V = torch.linalg.svd(out, full_matrices=False)
-        out = torch.matmul(out, V[:output_dim].T)
-
-        return out
 
     return pool_fn
 

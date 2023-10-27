@@ -35,7 +35,7 @@ class Experiment:
 
         if self.rand_proj_dim is not None:
             print("Random projection...")
-            # Inputs must be full batch!!
+
             rand_proj = RandProj(self.rand_proj_dim)
 
             for key, act in self.activations.items():
