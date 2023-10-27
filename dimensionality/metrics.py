@@ -143,7 +143,7 @@ def eff_dimension(eig):
 
 
 @torch.no_grad()
-def get_eigenspace(act, to_numpy=False, threshold=1-1e-8, epsilon=1e-15, debug=False, **kwargs):
+def get_eigenspace(act, to_numpy=False, epsilon=1e-14, **kwargs):
 
     if type(act) is np.ndarray:
         act = torch.from_numpy(act).cuda()
@@ -159,7 +159,7 @@ def get_eigenspace(act, to_numpy=False, threshold=1-1e-8, epsilon=1e-15, debug=F
     try:
         eig, vec = torch.linalg.eigh(K/P + epsilon*Id)
     except Exception as e:
-        print(e, 'Trying eigh with higher regularization')
+        print(e, 'Trying eigh with higher epsilon')
         K = act @ act.T
         eig, vec = torch.linalg.eigh(K/P + 1e-8*Id)
     eig = torch.flip(eig, dims=[0])

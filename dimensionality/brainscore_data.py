@@ -10,7 +10,7 @@ import os
 import pickle
 
 
-def get_neural_data(region, dataset='dicarlo', image_type='original'):
+def get_neural_data(region, dataset='dicarlo', image_type='original', loader_kwargs=None):
 
     assert region in ['V1', 'V2', 'V4', 'IT']
 
@@ -42,13 +42,14 @@ def get_neural_data(region, dataset='dicarlo', image_type='original'):
         raise Exception(f'No such dataset with dataset {dataset} and region {region}!')
 
     # Load images vs responses data_loader
-    loader_kwargs = {'batch_size': 800,
-                     'shuffle': False,
-                     'num_workers': 4,
-                     'pin_memory': True,
-                     'onehot': True,
-                     'labels_from': 'neural_activity'
-                     }
+    if loader_kwargs is None:
+        loader_kwargs = {'batch_size': 800,
+                         'shuffle': False,
+                         'num_workers': 4,
+                         'pin_memory': True,
+                         'onehot': True,
+                         'labels_from': 'neural_activity'
+                         }
 
     # Get the DataLoader for Neural Responses and the entire ordered data
     data_loader_neural, label_map = get_dataloader(df, **loader_kwargs)

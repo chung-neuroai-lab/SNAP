@@ -48,7 +48,7 @@ class Experiment:
     @torch.no_grad()
     def compute_metrics(self, images, labels, activations=None, max_points=10000, **kwargs):
 
-        assert type(labels) == dict, "labels should be provided as a dict (e.g. {'classes': classes})"
+        assert type(labels) is dict, "labels should be provided as a dict (e.g. {'classes': classes})"
         print("Computing metrics...")
 
         if activations is not None:
