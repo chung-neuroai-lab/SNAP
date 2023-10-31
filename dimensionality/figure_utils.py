@@ -106,7 +106,7 @@ def plot_region_contours(all_reg_hist,
 
         # Define the colormap and normalization for the datapoints
         cmap_data = all_models[coloring]
-	if isinstance(cmap_data, list):
+        if isinstance(cmap_data, list):
             cmap_data = np.array(cmap_data)
         if len(cmap_data.shape) == 2:
             cmap_data = cmap_data[:, p_idx]
