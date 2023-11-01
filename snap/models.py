@@ -383,7 +383,7 @@ def get_barlowtwins(pretrained=True, device='cuda'):
 
 def get_SimCLR(model_name, pretrained=True, device='cuda'):
 
-    import dimensionality.simclr as simclr
+    import snap.simclr as simclr
 
     # # Config is located at vissl/configs/config/pretrain/simclr/simclr_8node_resnet.yaml.
     # # All other options override the simclr_8node_resnet.yaml config.

@@ -421,7 +421,7 @@ def get_all_data(process_fn, sort_coord, trained, region_list, pooling_list,
 
 
 def compute_mode_errs(eigs, weights, pvals, threshold=0.99, reg=1e-14):
-    import dimensionality.regression_utils as reg_utils
+    import snap.regression_utils as reg_utils
 
     if len(eigs.shape) == 1:
         eigs, weights, pvals = [val[None, :] for val in [eigs, weights, pvals]]

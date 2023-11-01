@@ -3,6 +3,6 @@ from . import figure_utils
 
 from . import (metrics, models, wrapper, experiment, brainscore_data, regression_utils)
 
-import dimensionality.simclr
-import dimensionality.cornet.cornet
-import dimensionality.vonenet.vonenet
+import snap.simclr
+import snap.cornet.cornet
+import snap.vonenet.vonenet
